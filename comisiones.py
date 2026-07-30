@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# programa de comisiones
-# hecho por kevin, no tocar, ya funciona
+"""Calcula las comisiones mensuales de los vendedores."""
 
 COMISION_BASICA = 0.05
 COMISION_ALTA = 0.08
@@ -9,7 +8,6 @@ META_BONO = 50000
 BONO = 500
 ANCHO_REPORTE = 44
 
-# lista de vendedores
 vendedores = [
     ("María López", 45000.00),
     ("Carlos Pérez", 28500.00),
@@ -38,14 +36,10 @@ def calcular_comisiones():
     print("    COMISIONES DEL MES - LA COMERCIAL")
     print("=" * ANCHO_REPORTE)
 
-    # recorre la lista
     for nombre, ventas in vendedores:
         total_comision = calcular_comision(ventas)
         total_pagar += total_comision
         print(nombre + ": Q " + str(total_comision))
-
-    # ta = tp * 1.12
-    # print("con iva", ta)
 
     print("-" * ANCHO_REPORTE)
     print("Total a pagar: Q " + str(round(total_pagar, 2)))
