@@ -19,6 +19,18 @@ vendedores = [
 ]
 
 
+def calcular_comision(ventas):
+    if ventas > META_COMISION_ALTA:
+        porcentaje = COMISION_ALTA
+        bono = BONO if ventas > META_BONO else 0
+    else:
+        porcentaje = COMISION_BASICA
+        bono = 0
+
+    comision = round(ventas * porcentaje, 2)
+    return round(comision + bono, 2)
+
+
 def calcular_comisiones():
     total_pagar = 0
 
@@ -27,38 +39,10 @@ def calcular_comisiones():
     print("=" * ANCHO_REPORTE)
 
     # recorre la lista
-    for vendedor in vendedores:
-
-        # si vendio mas de 30000
-        if vendedor[1] > META_COMISION_ALTA:
-
-            # calcula la comision del 8%
-            comision = vendedor[1] * COMISION_ALTA
-            comision = round(comision, 2)
-
-            # el bono es de 300
-            if vendedor[1] > META_BONO:
-                bono = BONO
-            else:
-                bono = 0
-
-            total_comision = round(comision + bono, 2)
-            total_pagar += total_comision
-
-            print(vendedor[0] + ": Q " + str(total_comision))
-
-        else:
-
-            # calcula la comision del 5%
-            comision = vendedor[1] * COMISION_BASICA
-            comision = round(comision, 2)
-
-            bono = 0
-
-            total_comision = round(comision + bono, 2)
-            total_pagar += total_comision
-
-            print(vendedor[0] + ": Q " + str(total_comision))
+    for nombre, ventas in vendedores:
+        total_comision = calcular_comision(ventas)
+        total_pagar += total_comision
+        print(nombre + ": Q " + str(total_comision))
 
     # ta = tp * 1.12
     # print("con iva", ta)
